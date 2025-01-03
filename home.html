@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="shortcut icon" href="images/image.png" type="image/x-icon">
+</head>
+<header id="tab">
+    <!--<div class="logo">
+        <img src="images/image.pn" alt="Logo">
+    </div>-->
+    <nav>
+        <ul id="tabs">
+            <a href="#" id="home">Home</a>
+            <a href="#work" id="about">About</a>
+            <a href="#" id="services">Services</a>
+            <a href="#" id="contact">Contact</a>
+        </ul>
+    </nav> 
+</header>
+<body>
+    <div>
+        <h1 id="h1"></h1>
+    </div>
+    <div id="img">
+        
+        <img src="images/image.png" alt="" id="img">
+    </div>  
+    <div class="works"></div>
+    <div class="work" >
+    
+        <p>
+        At D-Code, we specialize in crafting stunning,
+        user-friendly websites that bring your vision 
+        to life.
+        </p>
+    </div>
+    <div class="work">
+    <p>
+        Whether you're launching a new business, 
+        expanding your online presence, or looking to 
+        refresh your digital identity, our team of 
+        skilled designers and developers delivers 
+        tailored solutions to meet your unique needs. 
+    </p>
+    <p>
+        From sleek, responsive designs to powerful 
+        e-commerce platforms and interactive user 
+        experiences, D-Code ensures your website not 
+        only looks great but performs seamlessly across
+        all devices. Let us help you stand out in the 
+        digital world with a website that speaks volumes 
+        about your brand.
+    </p>
+    </ul>
+    </div>
+</div>
+    <div id="services-section" class="services-section" style="
+    padding: 20px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    margin: 20px 0; 
+    text-align: center; 
+    border-radius: 5px;">
+    <h2 style="color: #333; margin-bottom: 15px;">Frontend Development Services</h2>
+    <p>We specialize in creating responsive, user-friendly, and visually stunning web applications.</p>
+    <ul style="list-style-type: none; padding: 0;">
+        <li style="margin: 5px 0; color: #555;">Custom Web Design</li>
+        <li style="margin: 5px 0; color: #555;">HTML, CSS, and JavaScript Development</li>
+        <li style="margin: 5px 0; color: #555;">React and Vue.js Applications</li>
+        <li style="margin: 5px 0; color: #555;">Cross-Browser Compatibility</li>
+        <li style="margin: 5px 0; color: #555;">Performance Optimization</li>
+    </ul>
+    <button onclick="scrollToContact()" style="
+        margin-top: 15px; 
+        padding: 10px 20px; 
+        background-color: #007bff; 
+        color: white; 
+        border: none; 
+        border-radius: 3px; 
+        cursor: pointer;">
+        Get Started
+    </button>
+</div>
+
+<script>
+    function scrollToContact() {
+        const contactSection = document.querySelector('#contact-section');
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('Contact section not found!');
+        }
+    }
+</script>
+<div id="contact-wrapper" class="contact-wrapper">
+
+    <!-- Toggle Button with Arrow -->
+    <div id="toggle-button" onclick="toggleContactSection()">
+        Contact Us
+        <span id="toggle-arrow">↓</span>
+    </div>
+
+    <!-- Hidden Contact Section -->
+    <div id="contact-section">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you! Get in touch with us for any inquiries or feedback.</p>
+        <form id="contact-form">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea placeholder="Your Message" rows="4"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Inline CSS -->
+    <style>
+        /* Basic Styles for the Contact Section */
+        #contact-section {
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+
+        /* Style for the button that toggles the contact section */
+        #toggle-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Style for the arrow icon */
+        #toggle-arrow {
+            margin-left: 10px;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotate arrow when section is open */
+        .open #toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Styles for the form */
+        #contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #contact-form input,
+        #contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #contact-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- Inline JavaScript -->
+    <script>
+        function toggleContactSection() {
+            const contactSection = document.getElementById('contact-section');
+            const button = document.getElementById('toggle-button');
+            const arrow = document.getElementById('toggle-arrow');
+
+            // Toggle the display of the contact section
+            contactSection.style.display = (contactSection.style.display === 'none' || contactSection.style.display === '') ? 'block' : 'none';
+
+            // Toggle the arrow rotation
+            button.classList.toggle('open');
+        }
+    </script>
+
+</div>
+
+
+    <script src="js/index.js"></script>
+</body>
+</html>

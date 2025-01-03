@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .loader-container {
+            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .loader {
+            width: 150px;
+            height: 150px;
+            border: 10px solid #ffffff20;
+            border-top: 10px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 10px solid transparent;
+            border-top: 10px solid #ffffff50;
+            animation: spin 2s linear infinite;
+        }
+        .progress-text {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards, glow 2s ease-in-out infinite;
+        }
+        .loading-text {
+            color: #fff;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            margin-top: 20px;
+            position: relative;
+        }
+        .loading-text span {
+            display: inline-block;
+            animation: bounce 1.4s infinite, glowText 2s infinite;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .loading-text span:nth-child(2) { animation-delay: 0.1s; }
+        .loading-text span:nth-child(3) { animation-delay: 0.2s; }
+        .loading-text span:nth-child(4) { animation-delay: 0.3s; }
+        .loading-text span:nth-child(5) { animation-delay: 0.4s; }
+        .loading-text span:nth-child(6) { animation-delay: 0.5s; }
+        .loading-text span:nth-child(7) { animation-delay: 0.6s; }
+        .progress-bar {
+            width: 300px;
+            height: 8px;
+            background: #ffffff20;
+            border-radius: 4px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ffffff50, #fff);
+            animation: shimmer 2s infinite;
+            transform: skewX(-20deg);
+        }
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: moveParticle 3s infinite linear;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) skewX(-20deg); }
+            100% { transform: translateX(100%) skewX(-20deg); }
+        }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
+        }
+        @keyframes glowText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes moveParticle {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    <div class="loader-container">
+        <div class="loader"></div>
+        <div class="progress-text">0%</div>
+        <div class="progress-bar"></div>
+        <div class="loading-text">
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+    </div>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.opacity = Math.random() * 0.5;
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Simulate loading progress with random pauses
+        const progressText = document.querySelector('.progress-text');
+        const progressBar = document.querySelector('.progress-bar');
+        const loaderContainer = document.querySelector('.loader-container');
+        let progress = 0;
+        let pauseCount = 0;
+        
+        const updateProgress = () => {
+            if (progress <= 100) {
+                // Update progress text and bar
+                progressText.textContent = `${progress}%`;
+                progressBar.style.setProperty('--progress', `${progress}%`);
+                
+                // Random pause logic
+                if (progress > 0 && progress < 100 && Math.random() < 0.1 && pauseCount < 4) {
+                    pauseCount++;
+                    setTimeout(updateProgress, Math.random() * 1000 + 1000); // Random pause between 1-2 seconds
+                } else {
+                    progress++;
+                    setTimeout(updateProgress, 30);
+                }
+            } else {
+                // Add fade out animation
+                loaderContainer.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+            }
+        };
+        
+        updateProgress();
+    </script>
+</body>
+</html>
